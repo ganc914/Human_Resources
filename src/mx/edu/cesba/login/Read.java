@@ -6,9 +6,11 @@
 package mx.edu.cesba.login;
 
 import conexion.conexion;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -92,6 +94,12 @@ public class Read extends javax.swing.JFrame {
 
         jLabel2.setText("ID");
 
+        txt_id.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_idKeyTyped(evt);
+            }
+        });
+
         jLabel3.setText("First Name");
 
         txt_fn.addActionListener(new java.awt.event.ActionListener() {
@@ -99,22 +107,86 @@ public class Read extends javax.swing.JFrame {
                 txt_fnActionPerformed(evt);
             }
         });
+        txt_fn.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_fnKeyTyped(evt);
+            }
+        });
 
         jLabel4.setText("Last Name");
 
+        txt_ln.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_lnKeyTyped(evt);
+            }
+        });
+
         jLabel5.setText("Age");
+
+        txt_age.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txt_ageFocusLost(evt);
+            }
+        });
+        txt_age.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                txt_ageMouseExited(evt);
+            }
+        });
+        txt_age.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                txt_ageInputMethodTextChanged(evt);
+            }
+        });
+        txt_age.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_ageActionPerformed(evt);
+            }
+        });
+        txt_age.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_ageKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_ageKeyTyped(evt);
+            }
+        });
 
         jLabel6.setText("Email");
 
         jLabel7.setText("Phone");
 
+        txt_phone.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txt_phoneFocusLost(evt);
+            }
+        });
         txt_phone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_phoneActionPerformed(evt);
             }
         });
+        txt_phone.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_phoneKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_phoneKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_phoneKeyTyped(evt);
+            }
+        });
 
         jLabel8.setText("Salary");
+
+        txt_salary.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_salaryKeyTyped(evt);
+            }
+        });
 
         jLabel9.setText("Hire Date");
 
@@ -139,6 +211,11 @@ public class Read extends javax.swing.JFrame {
         btn_update.setText("Actualizar");
 
         btn_consult.setText("Consultar");
+        btn_consult.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_consultActionPerformed(evt);
+            }
+        });
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/human-resources (3).png"))); // NOI18N
 
@@ -280,7 +357,59 @@ public class Read extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_phoneActionPerformed
 
     private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
-        // TODO add your handling code here:
+
+int age = Integer.parseInt(txt_age.getText());
+String phone = txt_phone.getText();
+        int length = phone.length(); 
+        int i=0;
+       
+          if (age <=17){
+            getToolkit().beep();
+           //evt.consume();
+           i=i+0;
+           JOptionPane.showMessageDialog(null, "DEBES SER MAYOR DE EDAD! POR FAVOR REVISA EDAD INGRESADA");
+        
+        }else i=i+1;
+        if (length<10) {
+            getToolkit().beep();
+           //evt.consume();
+            i=i+0;
+           JOptionPane.showMessageDialog(null, "INGRESA 10 DIGITOS PARA TU TELEFONO");
+        
+            
+        }else {i=i+1;
+            
+        } if (i>=2) {
+            Agregar();
+            limpiartable();
+        }
+           
+//        String phone = txt_phone.getText();
+//        int length = phone.length(); 
+//        
+//        char c = evt.getKeyChar();
+//        
+//        
+//        if (evt.getKeyChar()>='0' && evt.getKeyChar()<= '9') {
+//            if (length<10) {
+//                 //getToolkit().beep();
+//           //evt.consume();
+//           //JOptionPane.showMessageDialog(null,"INGRESA 10 DIGITOS");
+//                txt_phone.setEditable(true); 
+//                
+//            }else{
+//                txt_phone.setEditable(false); 
+//            }
+//        }else{
+//            if (evt.getExtendedKeyCode()== KeyEvent.VK_BACK_SPACE || evt.getExtendedKeyCode()== KeyEvent.VK_DELETE) {
+//                txt_phone.setEditable(true); 
+//            }
+//            else{
+//                txt_phone.setEditable(false); 
+//            }
+//        }
+        
+        
     }//GEN-LAST:event_btn_addActionPerformed
 
     private void btn_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearActionPerformed
@@ -293,6 +422,167 @@ public class Read extends javax.swing.JFrame {
     txt_salary.setText("");      // TODO add your handling code here:
     txt_hd.setText("");        // TODO add your handling code here:
     }//GEN-LAST:event_btn_clearActionPerformed
+
+    private void txt_ageKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_ageKeyTyped
+       char onlynum = evt.getKeyChar();
+       //int  num = evt
+    
+       
+       if (Character.isLetter(onlynum)){
+           getToolkit().beep();
+           evt.consume();
+           JOptionPane.showMessageDialog(null, "INGRESA SOLO NUMEROS");
+       }
+//       if(onlynum <= 17){
+//           getToolkit().beep();
+//           evt.consume();
+//           JOptionPane.showMessageDialog(null, "DEBES SER MAYOR DE EDAD");
+//       }
+       
+       
+    }//GEN-LAST:event_txt_ageKeyTyped
+
+    private void txt_idKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_idKeyTyped
+        // TODO add your handling code here:char onlynum = evt.getKeyChar();
+       char onlynum = evt.getKeyChar();
+       if (Character.isLetter(onlynum)){
+           getToolkit().beep();
+           evt.consume();
+           JOptionPane.showMessageDialog(null, "INGRESA SOLO NUMEROS");
+       
+    }      
+    }//GEN-LAST:event_txt_idKeyTyped
+
+    private void txt_phoneKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_phoneKeyTyped
+//         char onlynum = evt.getKeyChar();
+//         String phonenumber = txt_phone.getText();
+//        int length = phonenumber.length();
+//        char c = evt.getKeyChar();
+//       if (Character.isLetter(onlynum)){
+//           getToolkit().beep();
+//           evt.consume();
+//           JOptionPane.showMessageDialog(null, "INGRESA SOLO NUMEROS");
+//       
+//    }
+//     
+//       if(length<10){
+//          getToolkit().beep();
+//           evt.consume();
+//           JOptionPane.showMessageDialog(null, "INGRESA 10 DIGITOS");
+//       }
+    }//GEN-LAST:event_txt_phoneKeyTyped
+
+    private void txt_salaryKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_salaryKeyTyped
+        char onlynum = evt.getKeyChar();
+       if (Character.isLetter(onlynum)){
+           getToolkit().beep();
+           evt.consume();
+           JOptionPane.showMessageDialog(null, "INGRESA SOLO NUMEROS");
+       
+    }
+    }//GEN-LAST:event_txt_salaryKeyTyped
+
+    private void txt_fnKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_fnKeyTyped
+       char c = evt.getKeyChar();
+       
+       if (Character.isLowerCase(c)){
+           String cad = ("" + c).toUpperCase();
+           c = cad.charAt(0);
+           evt.setKeyChar(c);
+       }
+       if (Character.isDigit(c)){
+           getToolkit().beep();
+           evt.consume();
+           JOptionPane.showMessageDialog(null,"INGRESAR SOLO TEXTO");
+       }
+    }//GEN-LAST:event_txt_fnKeyTyped
+
+    private void btn_consultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_consultActionPerformed
+        listar();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_consultActionPerformed
+
+    private void txt_lnKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_lnKeyTyped
+       char c = evt.getKeyChar();
+       
+       if (Character.isLowerCase(c)){
+           String cad = ("" + c).toUpperCase();
+           c = cad.charAt(0);
+           evt.setKeyChar(c);
+       }
+       if (Character.isDigit(c)){
+           getToolkit().beep();
+           evt.consume();
+           JOptionPane.showMessageDialog(null,"INGRESAR SOLO TEXTO");
+       } 
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_lnKeyTyped
+
+    private void txt_phoneFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_phoneFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_phoneFocusLost
+
+    private void txt_phoneKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_phoneKeyReleased
+   
+     
+            // TODO add your handling code here:
+    }//GEN-LAST:event_txt_phoneKeyReleased
+
+    private void txt_ageKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_ageKeyReleased
+
+    }//GEN-LAST:event_txt_ageKeyReleased
+
+    private void txt_ageMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_ageMouseExited
+     // TODO add your handling code here:
+    }//GEN-LAST:event_txt_ageMouseExited
+
+    private void txt_ageFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_ageFocusLost
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_ageFocusLost
+
+    private void txt_ageInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_txt_ageInputMethodTextChanged
+//Integer age = Integer.parseInt(txt_age.getText());
+//if (age <= 17) {
+//   getToolkit().beep();
+//           evt.consume();
+//           JOptionPane.showMessageDialog(null,"SOLO 18+");
+//} // TODO add your handling code here:
+    }//GEN-LAST:event_txt_ageInputMethodTextChanged
+
+    private void txt_ageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_ageActionPerformed
+   
+            // TODO add your handling code here:
+    }//GEN-LAST:event_txt_ageActionPerformed
+
+    private void txt_phoneKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_phoneKeyPressed
+        String phone = txt_phone.getText();
+        int length = phone.length(); 
+        
+        char c = evt.getKeyChar();
+        
+        
+        if (evt.getKeyChar()>='0' && evt.getKeyChar()<= '9') {
+            if (length<10) {
+                 //getToolkit().beep();
+           //evt.consume();
+           //JOptionPane.showMessageDialog(null,"INGRESA 10 DIGITOS");
+                txt_phone.setEditable(true); 
+                
+            }else{
+                txt_phone.setEditable(false); 
+            }
+        }else{
+            if (evt.getExtendedKeyCode()== KeyEvent.VK_BACK_SPACE || evt.getExtendedKeyCode()== KeyEvent.VK_DELETE) {
+                txt_phone.setEditable(true); 
+            }
+            else{
+                txt_phone.setEditable(false); 
+            }
+        }
+            
+// TODO add your handling code here:
+    }//GEN-LAST:event_txt_phoneKeyPressed
 
     /**
      * @param args the command line arguments
@@ -352,6 +642,35 @@ public class Read extends javax.swing.JFrame {
             TablaDatos.setModel(modelo);
         }catch (Exception e){
             
+        }
+    }
+    void Agregar() {
+        int id = Integer.parseInt(txt_id.getText());
+        String firstname = txt_fn.getText();
+        String lastname = txt_ln.getText();
+        int age = Integer.parseInt(txt_age.getText());
+        String email = txt_email.getText();
+        int phonenumber = Integer.parseInt(txt_phone.getText());
+        Double salary = Double.parseDouble(txt_salary.getText());
+        String hiredate = (txt_hd.getText().trim());
+        
+        try {
+            String sql = "INSERT INTO employee (ID, FirstName, LastName, Age, Email, PhoneNumber, Salary, HireDate) values ('" + id + "','" + firstname + "','" + lastname + "','" + age + "','" + email + "','" + phonenumber + "','" + salary + "','" + hiredate + "')";
+            cn = con.getConnection();
+            st = cn.createStatement();
+            st.executeUpdate(sql);
+            
+            JOptionPane.showMessageDialog(null,"DATOS GUARDADOS CORRECTAMENTE");
+            limpiartable();
+                    
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null,"DATOS INCORRECTOS");
+        }
+    }
+    void limpiartable(){
+        for (int i=0;i <=TablaDatos.getRowCount(); i++){
+            modelo.removeRow(i);
+            i=i-1;
         }
     }
 
